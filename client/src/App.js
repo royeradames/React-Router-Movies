@@ -35,7 +35,10 @@ const App = () => {
     <div>
       <SavedList list={[ /* This is stretch */]} />
       <Route path='/'>
-        {/* <MovieList/> */}
+        <MovieList movies={movieList}/>
+      </Route>
+      <Route path='/movies/:movieID'>
+        <MovieList movies={movieList}/>
       </Route>
     </div>
   );
