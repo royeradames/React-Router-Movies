@@ -1,12 +1,21 @@
+//libraries
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
+//components
 import SavedList from './Movies/SavedList';
+import MovieList from './Movies/MovieList'
+import Movie from './Movies/Movie'
 
+//React Router imports
+import { Switch, Link, Route, useHistory} from 'react-router-dom'
 const App = () => {
   const [saved, setSaved] = useState([]); // Stretch: the ids of "saved" movies
   const [movieList, setMovieList] = useState([]);
-
+  const history = useHistory()
+  const routeToHome = () =>{
+    history.push('/')
+  }
   useEffect(() => {
     const getMovies = () => {
       axios
@@ -27,8 +36,16 @@ const App = () => {
 
   return (
     <div>
-      <SavedList list={[ /* This is stretch */]} />
-      <div>Replace this Div with your Routes</div>
+      <SavedList list={[ /* This is stretch */]} routeToHome={routeToHome}/>
+      
+      <Switch>
+        <Route path='/movies/:movieID'>
+          <Movie />
+        </Route>
+        <Route path='/'>
+          <MovieList movies={movieList}/>
+        </Route>
+      </Switch>
     </div>
   );
 };
