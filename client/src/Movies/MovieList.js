@@ -14,10 +14,7 @@ const MovieList = props => {
 }
 
 function MovieDetails({ movie }) {
-  const { url } = useRouteMatch()
-
   const { title, director, metascore } = movie;
-  debugger
   return (
     <Link to={`/movies/${movie.id}`}> 
       <div className="movie-card">
